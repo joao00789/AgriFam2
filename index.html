@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AgriFam conecta você a quem produz alimentos locais com cuidado." />
+  <title>AgriFam | Do campo para sua mesa</title>
+  <script>
+    const page = new URLSearchParams(location.search).get("page") || "inicio";
+    document.documentElement.dataset.page = ["inicio", "produtos", "produtores", "sobre"].includes(page) ? page : "inicio";
+    const pageTitles = { inicio: "AgriFam | Do campo para sua mesa", produtos: "Produtos | AgriFam", produtores: "Produtores | AgriFam", sobre: "Sobre a AgriFam" };
+    document.title = pageTitles[document.documentElement.dataset.page];
+  </script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Nunito+Sans:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Barra superior com aviso da plataforma -->
+  <div class="announcement">
+    <span>Colheita local, impacto real.</span><a href="?page=sobre#educacao">Conheça o AgriFam Educação <span
+        aria-hidden="true">↗</span></a>
+  </div>
+
+  <!-- CABEÇALHO: navegação, busca e ações do usuário -->
+  <header class="site-header" id="topo">
+    <div class="header-inner">
+      <a class="brand" href="?page=inicio#topo" aria-label="AgriFam, início"><img src="asset/imagens/logo 2.png"
+          alt="AgriFam" /></a>
+      <div class="desktop-search search-wrap">
+        <img src="asset/icons/lupa.png" alt="" aria-hidden="true" /><input id="searchInput" type="search"
+          placeholder="Busque produtos, produtores..." aria-label="Buscar no AgriFam" /><button class="voice-search"
+          type="button" aria-label="Pesquisar por voz">
+          <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2m7 9v3m-4 0h8" />
+          </svg>
+        </button>
+      </div>
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a class="home-nav-link" href="?page=inicio#topo"><svg class="nav-home-icon" xmlns="http://www.w3.org/2000/svg" width="24"
+            height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path
+              d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.793 8.707h-3a1.5 1.5 0 0 0 -1.5 1.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5 -1.5v-3a1.5 1.5 0 0 0 -1.5 -1.5" />
+          </svg>
+          Início</a><a href="?page=produtos#produtos">Produtos</a><a href="?page=produtores#produtores">Produtores</a><a href="?page=sobre#como-funciona">Como
+          funciona</a>
+      </nav>
+      <div class="header-actions">
+        <button class="icon-button favorite-nav" data-action="favorites" aria-label="Ver favoritos">
+          <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19.5 12.572 12 20l-7.5-7.428A5 5 0 1 1 12 6.006a5 5 0 1 1 7.5 6.566" />
+        </svg><span class="nav-count favorite-count">0</span></button><button class="icon-button cart-nav"
+          data-action="cart" aria-label="Abrir carrinho">
+          <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M2.5 3h2l2.4 12h11.4l2.2-8H6" />
+            <circle cx="9" cy="20" r="1.25" />
+            <circle cx="18" cy="20" r="1.25" />
+          </svg><span class="nav-count cart-count">0</span></button><button
+          class="icon-button chat-nav" data-action="chat" aria-label="Abrir conversas">
+          <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 5a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-5l-5 5v-5H7a3 3 0 0 1-3-3V5Z" />
+            <path d="M8 7h8M8 11h5" />
+          </svg>
+          <span class="nav-count chat-count">0</span></button><a class="profile-link" id="profileLink" href="#perfil" hidden>Meu perfil</a><a class="login-link" href="#login">Entrar</a><a
+          class="button button-small header-seller" id="sellerCta" href="#seja-produtor">Vender no AgriFam <span>↗</span></a><button
+          class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mobileMenu" aria-label="Abrir menu">
+          <img src="asset/icons/menu hamburger open.png" alt="" />
+        </button>
+      </div>
+    </div>
+    <div class="mobile-search search-wrap">
+      <img src="asset/icons/lupa.png" alt="" aria-hidden="true" /><input id="mobileSearchInput" type="search"
+        placeholder="O que você procura?" aria-label="Buscar produtos" /><button class="voice-search" type="button"
+        aria-label="Pesquisar por voz">
+        <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z" />
+          <path d="M19 10v2a7 7 0 0 1-14 0v-2m7 9v3m-4 0h8" />
+        </svg>
+      </button>
+    </div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Navegação móvel">
+      <a href="?page=inicio#topo"><svg class="nav-home-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+          viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path
+            d="M12.707 2.293l9 9c.63 .63 .184 1.707 -.707 1.707h-1v6a3 3 0 0 1 -3 3h-10a3 3 0 0 1 -3 -3v-6h-1c-.89 0 -1.337 -1.077 -.707 -1.707l9 -9a1 1 0 0 1 1.414 0m.793 8.707h-3a1.5 1.5 0 0 0 -1.5 1.5v3a1.5 1.5 0 0 0 1.5 1.5h3a1.5 1.5 0 0 0 1.5 -1.5v-3a1.5 1.5 0 0 0 -1.5 -1.5" />
+        </svg>
+        Início</a><a href="?page=produtos#produtos">Produtos</a><a href="?page=produtos#categorias">Categorias</a><a
+        href="?page=produtores#produtores">Produtores</a><a href="#favoritos" data-open-favorites>Favoritos</a><a href="?page=sobre#educacao">AgriFam Educação</a><a href="?page=sobre#sobre">Sobre nós</a><a
+        href="?page=produtores#seja-produtor" id="sellerCtaMobile">Seja um produtor</a><a href="#perfil" id="profileLinkMobile" hidden>Meu perfil</a><a href="#login">Entrar</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-heading page-heading-products" aria-labelledby="productsPageTitle">
+      <p class="eyebrow">Direto de quem produz</p>
+      <h1 id="productsPageTitle">Comida de verdade, perto de você.</h1>
+      <p>Explore produtos locais, conheça sua origem e escolha com calma.</p>
+    </section>
+    <section class="page-heading page-heading-producers" aria-labelledby="producersPageTitle">
+      <p class="eyebrow">Gente que faz acontecer</p>
+      <h1 id="producersPageTitle">Conheça quem cultiva cada história.</h1>
+      <p>Encontre pequenos produtores e descubra o cuidado por trás de cada colheita.</p>
+    </section>
+    <section class="page-heading page-heading-about" aria-labelledby="aboutPageTitle">
+      <p class="eyebrow">Nossa comunidade</p>
+      <h1 id="aboutPageTitle">Relações mais próximas, uma escolha de cada vez.</h1>
+      <p>A AgriFam aproxima famílias produtoras de quem valoriza alimentos locais.</p>
+    </section>
+    <!-- DESTAQUE: carrossel principal da página -->
+    <section class="hero swiper" aria-label="Destaques AgriFam">
+      <canvas class="hero-shader" id="heroShader" aria-hidden="true"></canvas>
+      <div class="swiper-wrapper">
+        <article class="swiper-slide hero-slide hero-one">
+          <div class="hero-content">
+            <p class="eyebrow light">Agricultura familiar</p>
+            <h1>Do campo<br />para sua mesa.</h1>
+            <p>
+              Alimentos frescos, artesanais e cheios de história, produzidos
+              por famílias da nossa região.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-light" href="?page=produtos#produtos">Comprar agora <span>↗</span></a><a
+                class="text-link light-link" href="?page=produtores#produtores">Conheça os produtores <span>→</span></a>
+            </div>
+          </div>
+          <div class="slide-note">
+            <strong>01</strong><span></span><small>Frescor que aproxima</small>
+          </div>
+        </article>
+        <article class="swiper-slide hero-slide hero-two">
+          <div class="hero-content">
+            <p class="eyebrow light">Compre de quem produz</p>
+            <h1>Valorize<br />quem produz.</h1>
+            <p>
+              Seu consumo pode fortalecer uma família, uma comunidade e o
+              futuro da nossa terra.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-light" href="?page=produtores#produtores">Encontrar produtores <span>↗</span></a><a
+                class="text-link light-link" href="?page=produtores#seja-produtor">Quero vender <span>→</span></a>
+            </div>
+          </div>
+          <div class="slide-note">
+            <strong>02</strong><span></span><small>Impacto em cada escolha</small>
+          </div>
+        </article>
+        <article class="swiper-slide hero-slide hero-three">
+          <div class="hero-content">
+            <p class="eyebrow light">Sabores da nossa região</p>
+            <h1>Sabor que vem<br />da nossa terra.</h1>
+            <p>
+              Descubra frutas, verduras, mel, artesanatos e tudo o que torna
+              nossa região especial.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-light" href="?page=produtos#categorias">Explorar produtos <span>↗</span></a>
+            </div>
+          </div>
+          <div class="slide-note">
+            <strong>03</strong><span></span><small>Feito perto, feito com alma</small>
+          </div>
+        </article>
+      </div>
+      <button class="swiper-button-prev" aria-label="Slide anterior">
+        <img src="asset/icons/seta esquerda.png" alt="" /></button><button class="swiper-button-next"
+        aria-label="Próximo slide">
+        <img src="asset/icons/seta direita.png" alt="" />
+      </button>
+      <div class="swiper-pagination"></div>
+    </section>
+
+    <!-- CATEGORIAS: preenchidas dinamicamente pelo script -->
+    <section class="section categories-section" id="categorias">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Encontre do seu jeito</p>
+          <h2>Explore por categoria</h2>
+        </div>
+        <a class="text-link" href="#produtos">Ver todas <span>→</span></a>
+      </div>
+      <div class="category-list" id="categoryList"></div>
+    </section>
+
+    <!-- CATÁLOGO: filtros e produtos preenchidos dinamicamente pelo script -->
+    <section class="section products-section" id="produtos">
+      <div class="section-heading product-heading">
+        <div>
+          <p class="eyebrow">Escolhas da semana</p>
+          <h2>Produtos em destaque</h2>
+          <p class="section-intro">
+            O melhor da produção local, selecionado para você.
+          </p>
+        </div>
+        <div class="view-actions">
+          <button class="filter-trigger" id="filterTrigger">
+            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 6h16M7 12h10m-7 6h4" />
+            </svg>
+            Filtros</button><a class="text-link" href="#produtos">Ver catálogo <span>→</span></a>
+        </div>
+      </div>
+      <div class="catalog-layout">
+        <aside class="filters" id="filters">
+          <div class="filter-header">
+            <strong>Filtre sua busca</strong><button id="closeFilters" aria-label="Fechar filtros">×</button>
+          </div>
+          <label>Categoria<select id="categoryFilter">
+              <option value="">Todas as categorias</option>
+            </select></label><label>Localização<select>
+              <option>Qualquer região</option>
+              <option>Zona rural</option>
+              <option>Centro</option>
+            </select></label><label>Ordenar por<select id="sortFilter">
+              <option value="featured">Mais relevantes</option>
+              <option value="price-low">Menor preço</option>
+              <option value="rating">Melhor avaliados</option>
+            </select></label>
+          <div class="filter-check">
+            <span>Disponibilidade</span><label><input type="checkbox" checked /> Disponível agora</label>
+          </div>
+          <button class="clear-filter" id="clearFilters">
+            Limpar filtros
+          </button>
+        </aside>
+        <div class="products-area">
+          <div class="results-bar">
+            <span id="resultsCount">8 resultados encontrados</span><button id="mobileFilterClose" class="mobile-only">
+              Filtrar resultados ☷
+            </button>
+          </div>
+          <div class="product-grid" id="productGrid"></div>
+          <div class="empty-state" id="emptyState" hidden>
+            <span>⌕</span>
+            <h3>Nenhum produto encontrado.</h3>
+            <p>Tente buscar por outro termo ou limpar seus filtros.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA: explicação do fluxo de compra local -->
+    <section class="split-banner" id="como-funciona">
+      <div class="split-image"></div>
+      <div class="split-copy">
+        <p class="eyebrow">Uma rede que alimenta</p>
+        <h2>Comprar local muda tudo.</h2>
+        <p>
+          Você recebe comida de verdade, quem produz recebe reconhecimento e a
+          nossa região fica mais forte.
+        </p>
+        <div class="steps">
+          <div>
+            <b>01</b><span><strong>Você escolhe</strong><small>Produtos frescos direto de quem faz.</small></span>
+          </div>
+          <div>
+            <b>02</b><span><strong>O produtor prepara</strong><small>Com cuidado, transparência e afeto.</small></span>
+          </div>
+          <div>
+            <b>03</b><span><strong>Você recebe</strong><small>Mais sabor, menos distância.</small></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRODUTORES: cards e perfis preenchidos dinamicamente pelo script -->
+    <section class="section producers-section" id="produtores">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Gente que faz acontecer</p>
+          <h2>Conheça nossos produtores</h2>
+        </div>
+        <a class="text-link" href="#seja-produtor">Ver todos <span>→</span></a>
+      </div>
+      <div class="producer-grid" id="producerGrid"></div>
+    </section>
+
+    <!-- BENEFÍCIOS: principais motivos para comprar na plataforma -->
+    <section class="benefits-band">
+      <div class="benefit-intro">
+        <p class="eyebrow">Mais que uma compra</p>
+        <h2>Uma escolha que<br />volta para você.</h2>
+      </div>
+      <div class="benefit">
+        <span>✦</span>
+        <h3>Frescor de verdade</h3>
+        <p>
+          Produtos colhidos e preparados com tempo, cuidado e origem
+          conhecida.
+        </p>
+      </div>
+      <div class="benefit">
+        <span>↗</span>
+        <h3>Economia local</h3>
+        <p>
+          Seu dinheiro circula perto, fortalecendo famílias e pequenos
+          negócios.
+        </p>
+      </div>
+      <div class="benefit">
+        <span>♡</span>
+        <h3>Relações humanas</h3>
+        <p>
+          Conheça as histórias por trás de cada produto que chega à sua casa.
+        </p>
+      </div>
+    </section>
+
+    <!-- EDUCAÇÃO: apresentação dos temas da iniciativa AgriFam Educação -->
+    <section class="education-section" id="educacao">
+      <div class="education-copy">
+        <p class="eyebrow">Nosso segundo pilar</p>
+        <h2>AgriFam<br /><em>Educação</em></h2>
+        <p>
+          Mais do que conectar produtores. Queremos ajudar a transformar
+          digitalmente a agricultura familiar.
+        </p>
+        <a class="button button-green" href="#capacitacao">Conheça o projeto <span>↗</span></a>
+      </div>
+      <div class="education-topics">
+        <div class="topic active">
+          <span>01</span><strong>Letramento digital</strong><small>O primeiro passo para novas possibilidades.</small>
+        </div>
+        <div class="topic">
+          <span>02</span><strong>Segurança digital</strong><small>Mais confiança para navegar e vender.</small>
+        </div>
+        <div class="topic">
+          <span>03</span><strong>Fotografia de produtos</strong><small>Seu trabalho merece ser bem visto.</small>
+        </div>
+        <div class="topic">
+          <span>04</span><strong>WhatsApp para negócios</strong><small>Comunicação que aproxima.</small>
+        </div>
+        <div class="topic">
+          <span>05</span><strong>Marketing digital</strong><small>Conte a história da sua produção.</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPACITAÇÃO: cards que abrem detalhes em modal -->
+    <section class="section training-section" id="capacitacao">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Aprender junto é crescer</p>
+          <h2>Capacitação para agricultores</h2>
+        </div>
+        <a class="text-link" href="#educacao">Todos os encontros <span>→</span></a>
+      </div>
+      <div class="training-grid">
+        <button class="training-card reveal-item" data-training="Palestras">
+          <span class="training-number">01</span>
+          <svg class="training-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 4h16v11H4z" />
+            <path d="M8 20h8M12 15v5M8 8h8M8 11h5" />
+          </svg>
+          <h3>Palestras</h3>
+          <p>Conversas para abrir caminhos e inspirar novas ideias.</p>
+          <span class="card-arrow">↗</span>
+        </button><button class="training-card reveal-item" data-training="Oficinas">
+          <span class="training-number">02</span>
+          <svg class="training-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18a2.1 2.1 0 0 0 3 3l6.3-6.3a4 4 0 0 0 5.4-5.4L15 12l-3-3z" />
+            <path d="m14 4 6 6M17 3l4 4" />
+          </svg>
+          <h3>Oficinas</h3>
+          <p>Aprendizado prático para colocar a mão na massa.</p>
+          <span class="card-arrow">↗</span>
+        </button><button class="training-card reveal-item" data-training="Materiais educativos">
+          <span class="training-number">03</span>
+          <svg class="training-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            <path d="M8 6h8M8 10h8M8 14h5" />
+          </svg>
+          <h3>Materiais educativos</h3>
+          <p>Conteúdos simples para consultar quando precisar.</p>
+          <span class="card-arrow">↗</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- LOCALIZAÇÃO: área de atuação e números da plataforma -->
+    <section class="location-section" id="localizacao">
+      <!-- Mapa ilustrativo: no backend, os pontos podem vir de coordenadas reais. -->
+      <div class="map-art" role="img" aria-label="Mapa do Piauí com produtores próximos">
+        <svg class="piaui-map" viewBox="0 0 420 500" aria-hidden="true">
+          <path class="map-state"
+            d="M151 25 243 39 302 30 355 69 346 122 374 165 351 218 365 267 333 315 340 370 292 403 247 466 195 447 168 407 125 394 113 343 76 311 88 259 57 221 77 175 58 133 96 98 104 52Z" />
+          <path class="map-river" d="M116 74c48 43 62 88 45 134-16 45-4 93 37 143 22 27 38 57 45 90" />
+          <path class="map-river map-river-two" d="M296 74c-40 45-52 91-35 136 15 38 13 75-7 112" />
+        </svg>
+        <span class="map-pin pin-one" title="Teresina">Teresina</span>
+        <span class="map-pin pin-two" title="União">União</span>
+        <span class="map-pin pin-three" title="Altos">Altos</span>
+        <div class="map-label"><span class="map-label-dot"></span>Piauí</div>
+      </div>
+      <div class="location-copy">
+        <p class="eyebrow">Pertinho de você</p>
+        <h2>Fortalecendo<br />nossa região.</h2>
+        <p>
+          Começamos localmente, com a ambição de levar o sabor e a força da
+          agricultura familiar para todo o Brasil.
+        </p>
+        <div class="location-stats">
+          <span><strong id="statProducers">0</strong><small>produtores próximos</small></span><span><strong
+              id="statProducts">0</strong><small>produtos
+              disponíveis</small></span>
+        </div>
+        <a class="text-link" href="#produtores">Explorar a região <span>→</span></a>
+      </div>
+    </section>
+
+    <!-- CTA PARA PRODUTORES: futuro ponto de cadastro na API -->
+    <section class="producer-cta" id="seja-produtor">
+      <div>
+        <p class="eyebrow light">A sua produção tem valor</p>
+        <h2>Você produz.<br /><em>O AgriFam conecta.</em></h2>
+        <p>
+          Crie seu perfil, conte sua história e encontre pessoas que valorizam
+          o que você faz.
+        </p>
+      </div>
+      <div class="cta-actions">
+        <a class="button button-light" href="#cadastro">Quero ser produtor AgriFam <span>↗</span></a><span>Cadastro
+          gratuito e sem compromisso</span>
+      </div>
+    </section>
+  </main>
+
+  <!-- RODAPÉ: links institucionais e de suporte -->
+  <footer class="site-footer" id="sobre">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand brand-light" href="#topo"><img src="asset/imagens/logo 2.png" alt="AgriFam" /></a>
+        <p>Conectando quem produz<br />a quem valoriza.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">
+            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5" />
+              <circle cx="12" cy="12" r="4" />
+              <path d="M17.5 6.5h.01" />
+            </svg> </a><a href="#" aria-label="Facebook">
+            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M14 21v-7h3l1-4h-4V8a2 2 0 0 1 2-2h2V2h-3a5 5 0 0 0-5 5v3H7v4h3v7z" />
+            </svg> </a><a href="#" aria-label="WhatsApp">
+            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 21l1.7-3.8A8.8 8.8 0 1 1 12 21a8.8 8.8 0 0 1-4.2-1.1z" />
+              <path
+                d="M8.5 8.5c.4-.4 1-.2 1.2.3l.6 1.4c.1.3 0 .6-.2.8l-.6.5a6 6 0 0 0 3 3l.5-.6c.2-.2.5-.3.8-.2l1.4.6c.5.2.7.8.3 1.2l-.5.5c-.5.5-1.3.7-2 .4a8.5 8.5 0 0 1-5.2-5.2c-.3-.7-.1-1.5.4-2z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-column">
+        <strong>AgriFam</strong><a href="?page=inicio#topo">Início</a><a href="?page=produtos#produtos">Produtos</a><a
+          href="?page=produtores#produtores">Produtores</a><a href="?page=produtores#seja-produtor">Seja um produtor</a>
+      </div>
+      <div class="footer-column">
+        <strong>Para você</strong><a href="?page=sobre#como-funciona">Como funciona</a><a href="?page=sobre#educacao">Educação</a><a
+          href="#sobre">Sobre nós</a><a href="#topo">Contato</a>
+      </div>
+      <div class="footer-column">
+        <strong>Suporte</strong><a href="#topo">Dúvidas frequentes</a><a href="#topo">Termos de uso</a><a
+          href="#topo">Privacidade</a><a href="#topo">Fale conosco</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 AgriFam</span><span>Feito com cuidado na nossa região.</span>
+    </div>
+  </footer>
+
+  <!-- CARRINHO: fica no localStorage; o checkout chama POST /api/pedidos de verdade -->
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true">
+    <div class="drawer-header">
+      <div>
+        <p class="eyebrow">Sua seleção</p>
+        <h2>Meu carrinho <span class="cart-count">0</span></h2>
+      </div>
+      <button id="closeCart" aria-label="Fechar carrinho">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <div><span>Subtotal</span><strong id="cartTotal">R$ 0,00</strong></div>
+      <button class="button button-green" id="checkoutButton">
+        Continuar <span>→</span></button><small>Checkout demonstrativo. Pagamentos serão integrados
+        futuramente.</small>
+    </div>
+  </aside>
+
+  <!-- CHAT: conversas reais via /api/conversas (exige sessão) -->
+  <aside class="chat-drawer" id="chatDrawer" aria-hidden="true">
+    <div class="drawer-header chat-drawer-header">
+      <div>
+        <p class="eyebrow">Conexão direta</p>
+        <h2>Conversas</h2>
+      </div>
+      <button id="closeChat" aria-label="Fechar conversas">×</button>
+    </div>
+    <div class="chat-layout">
+      <aside class="chat-sidebar" aria-label="Lista de conversas">
+        <div class="chat-sidebar-heading">
+          <strong>Mensagens</strong>
+          <label class="chat-search">
+            <svg class="ui-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+            <input id="chatSearch" type="search" placeholder="Buscar conversa" aria-label="Buscar conversa" />
+          </label>
+        </div>
+        <div class="chat-contacts" id="chatContacts"></div>
+      </aside>
+      <section class="chat-conversation" aria-label="Conversa selecionada">
+        <div class="chat-contact-heading" id="chatContactHeading"></div>
+        <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+        <form class="chat-form" id="chatForm">
+          <input id="chatInput" type="text" maxlength="500" placeholder="Escreva uma mensagem..." autocomplete="off"
+            required />
+          <button type="submit" aria-label="Enviar mensagem">↑</button>
+        </form>
+      </section>
+    </div>
+  </aside>
+
+  <!-- CAMADA DE INTERAÇÃO: overlay usado pelo carrinho, filtros e modais -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- MODAL DE PRODUTOR: conteúdo inserido conforme o produtor escolhido -->
+  <div class="modal" id="producerModal" role="dialog" aria-modal="true" aria-labelledby="producerModalTitle">
+    <button class="modal-close" data-close-modal aria-label="Fechar">
+      ×
+    </button>
+    <div id="producerModalContent"></div>
+  </div>
+
+  <div class="modal favorites-modal" id="favoritesModal" role="dialog" aria-modal="true" aria-labelledby="favoritesTitle">
+    <button class="modal-close" data-close-modal aria-label="Fechar">×</button>
+    <p class="eyebrow">Sua lista</p>
+    <h2 id="favoritesTitle">Produtos favoritos</h2>
+    <p class="modal-subtitle">Seus favoritos ficam salvos neste navegador.</p>
+    <p class="favorites-empty" id="favoritesEmpty" hidden>Você ainda não favoritou produtos. Toque no coração de um produto para salvá-lo aqui.</p>
+    <div class="product-grid favorites-grid" id="favoritesGrid"></div>
+  </div>
+
+  <!-- MODAL DE AUTENTICAÇÃO -->
+  <div class="modal small-modal" id="authModal" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close-modal aria-label="Fechar">
+      ×
+    </button>
+    <p class="eyebrow">Bem-vindo à rede</p>
+    <h2 id="authTitle">Entre no AgriFam</h2>
+    <p class="modal-subtitle" id="authSubtitle">
+      Acompanhe seus pedidos e descubra novidades da sua região.
+    </p>
+    <div class="mode-switch" role="group" aria-label="Entrar ou criar conta">
+      <button type="button" class="active" data-auth-mode="login">Entrar</button>
+      <button type="button" data-auth-mode="register">Criar conta</button>
+    </div>
+    <form id="authForm">
+      <label id="authNameField" hidden>Nome<input id="authName" type="text" placeholder="Seu nome" /></label>
+      <label>Email<input id="authEmail" type="email" placeholder="voce@email.com" required /></label>
+      <label>Senha<input id="authPassword" type="password" placeholder="Sua senha" minlength="8" required /></label>
+      <div id="authRoleField" hidden>
+        <label>Eu sou<select id="authRole">
+            <option value="buyer">Comprador</option>
+            <option value="producer">Produtor</option>
+          </select></label>
+        <div id="authProducerFields" hidden>
+          <label>Nome da propriedade<input id="authProperty" type="text" placeholder="Ex.: Sítio Boa Esperança" /></label>
+          <label>Localização<input id="authLocation" type="text" placeholder="Ex.: Teresina - PI" /></label>
+          <label>Especialidade<input id="authSpecialty" type="text" placeholder="Ex.: Frutas e legumes" /></label>
+        </div>
+      </div>
+      <a class="forgot" href="#" id="authForgot">Esqueci minha senha</a><button
+        class="button button-green" type="submit" id="authSubmit">
+        Entrar <span>→</span>
+      </button>
+    </form>
+    <div class="auth-divider" id="authGoogleDivider"><span>ou continue com</span></div>
+    <button class="button button-light google-auth-button" id="googleAuthButton" type="button">
+      <span class="google-mark" aria-hidden="true">G</span> Entrar com Google
+    </button>
+    <p class="modal-switch" id="authSwitchText">
+      Ainda não tem conta? <a href="#" data-auth-mode="register">Criar conta</a>
+    </p>
+  </div>
+
+  <div class="modal small-modal" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle">
+    <button class="modal-close" data-close-modal aria-label="Fechar">×</button>
+    <p class="eyebrow">Sua conta</p>
+    <h2 id="profileTitle">Meu perfil</h2>
+    <p class="modal-subtitle">Atualize seus dados pessoais e as informações da sua loja.</p>
+    <form id="profileForm">
+      <div class="profile-avatar-editor">
+        <div class="profile-avatar-preview" id="profileAvatarPreview" aria-label="Prévia da foto de perfil"></div>
+        <div class="profile-avatar-copy">
+          <strong>Foto de perfil</strong>
+          <p>Ela aparece ao lado do seu nome nas conversas.</p>
+          <label class="profile-avatar-upload">
+            Escolher foto
+            <input id="profileAvatarFile" type="file" accept="image/png,image/jpeg,image/webp" />
+          </label>
+          <button class="profile-avatar-remove" id="profileAvatarRemove" type="button">Remover foto</button>
+          <small>PNG, JPG ou WebP · até 3 MB</small>
+        </div>
+      </div>
+      <label>Nome<input id="profileName" required minlength="2" /></label>
+      <label>Email<input id="profileEmail" type="email" required /></label>
+      <label>Senha atual (para trocar a senha)<input id="profileCurrentPassword" type="password" autocomplete="current-password" /></label>
+      <label>Nova senha<input id="profileNewPassword" type="password" minlength="8" autocomplete="new-password" placeholder="Mínimo 8 caracteres" /></label>
+      <div id="profileStoreFields" hidden>
+        <h3 class="my-products-heading">Perfil da loja</h3>
+        <label>Nome da propriedade<input id="profileProperty" minlength="2" /></label>
+        <label>Localização<input id="profileLocation" minlength="2" /></label>
+        <label>Especialidade<input id="profileSpecialty" minlength="2" /></label>
+        <label>Sobre a loja<textarea id="profileHistory" rows="4" maxlength="2000"></textarea></label>
+        <label>URL da imagem da loja<input id="profileStoreImage" type="url" placeholder="https://..." /></label>
+        <label>Enviar imagem da loja<input id="profileStoreImageFile" type="file" accept="image/png,image/jpeg,image/webp" /></label>
+      </div>
+      <button class="button button-green" type="submit" id="profileSubmit">Salvar alterações</button>
+    </form>
+  </div>
+
+  <!-- MODAL DE CAPACITAÇÃO: detalhes dos encontros educacionais -->
+  <div class="modal small-modal" id="trainingModal" role="dialog" aria-modal="true">
+    <button class="modal-close" data-close-modal aria-label="Fechar">
+      ×
+    </button>
+    <p class="eyebrow">AgriFam Educação</p>
+    <h2 id="trainingModalTitle">Palestras</h2>
+    <p class="modal-subtitle">
+      Encontros pensados para compartilhar conhecimento de forma simples,
+      prática e acolhedora.
+    </p>
+    <div class="modal-detail">
+      <span>Próximo encontro</span><strong>Em breve na sua região</strong><small>Cadastre seu interesse para receber
+        novidades.</small>
+    </div>
+    <button class="button button-green" data-close-modal>
+      Tenho interesse <span>→</span>
+    </button>
+  </div>
+
+  <!-- MODAL "MEUS PRODUTOS": produtor cadastra/edita/remove seus produtos (POST/PATCH/DELETE /api/produtos) -->
+  <div class="modal" id="myProductsModal" role="dialog" aria-modal="true" aria-labelledby="myProductsTitle">
+    <button class="modal-close" data-close-modal aria-label="Fechar">
+      ×
+    </button>
+    <p class="eyebrow">Painel do produtor</p>
+    <h2 id="myProductsTitle">Meus produtos</h2>
+    <p class="modal-subtitle">Cadastre, edite ou remova os produtos da sua propriedade.</p>
+
+    <form id="productForm" class="product-form">
+      <label>Nome do produto<input id="productName" type="text" placeholder="Ex.: Tomate Orgânico" required /></label>
+      <div class="product-form-row">
+        <label>Preço (R$)<input id="productPrice" type="number" step="0.01" min="0.01" placeholder="Ex.: 8.90"
+            required /></label>
+        <label>Unidade<input id="productUnit" type="text" placeholder="Ex.: kg, unidade, 500g" required /></label>
+      </div>
+      <div class="product-form-row">
+        <label>Categoria<select id="productCategory" required>
+            <option value="">Selecione...</option>
+          </select></label>
+        <label>Localização<input id="productLocation" type="text" placeholder="Ex.: Teresina - PI" required /></label>
+      </div>
+      <label>URL da imagem (opcional)<input id="productImage" type="url" placeholder="https://..." /></label>
+      <label>Enviar imagem do produto<input id="productImageFile" type="file" accept="image/png,image/jpeg,image/webp" /></label>
+      <div class="modal-actions">
+        <button class="button button-green" type="submit" id="productFormSubmit">Adicionar produto <span>→</span></button>
+        <button class="button button-light" type="button" id="productFormCancel" hidden>Cancelar edição</button>
+      </div>
+    </form>
+
+    <h3 class="my-products-heading">Produtos cadastrados</h3>
+    <div class="my-products-list" id="myProductsList"></div>
+  </div>
+
+  <!-- Mensagens rápidas para feedback das ações do usuário -->
+  <div class="toast" id="toast" role="status"></div>
+
+  <!-- Dependências e código da aplicação: mantenha esta ordem -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <!-- script.js e o bundle distribuido. A fonte TypeScript esta em script.ts. -->
+  <script src="script.js"></script>
+</body>
+
+</html>

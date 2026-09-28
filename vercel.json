@@ -1,0 +1,5 @@
+{
+  "installCommand": "npm ci --prefix server",
+  "buildCommand": "npm run build --prefix server",
+  "outputDirectory": "."
+}
