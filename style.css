@@ -568,29 +568,6 @@ button {
   color: #dce9dc;
 }
 
-.swiper-button-prev,
-.swiper-button-next {
-  width: 45px !important;
-  height: 45px !important;
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 50%;
-  color: #fff !important;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.swiper-button-prev {
-  left: 4% !important;
-}
-
-.swiper-button-next {
-  right: 4% !important;
-}
-
-.swiper-button-prev:after,
-.swiper-button-next:after {
-  display: none;
-}
-
 .swiper-pagination {
   bottom: 36px !important;
 }
@@ -1852,14 +1829,6 @@ body.has-scroll-reveal .reveal-item.is-visible {
   object-fit: contain;
 }
 
-.swiper-button-prev img,
-.swiper-button-next img {
-  width: 17px;
-  height: 17px;
-  object-fit: contain;
-  filter: brightness(0) invert(1);
-}
-
 .modal-producer-image {
   width: 100%;
   height: 210px;
@@ -2034,13 +2003,6 @@ body.has-scroll-reveal .reveal-item.is-visible {
     left: 9%;
     top: 13%;
     bottom: auto;
-  }
-
-  .swiper-button-prev,
-  .swiper-button-next {
-    top: 43% !important;
-    width: 37px !important;
-    height: 37px !important;
   }
 
   .section {

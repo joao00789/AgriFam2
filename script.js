@@ -136,8 +136,7 @@ if (window.Swiper && document.documentElement.dataset.page === "inicio") {
   new window.Swiper(".hero", {
     loop: true,
     autoplay: prefersReducedMotion ? false : { delay: 5500, disableOnInteraction: false },
-    pagination: { el: ".swiper-pagination", clickable: true },
-    navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" },
+    pagination: { el: ".swiper-pagination", clickable: false },
     keyboard: { enabled: true },
     touchRatio: 1,
   });
